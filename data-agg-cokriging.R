@@ -29,8 +29,8 @@ projection(st_grid) <- CRS("+init=epsg:7131")
 class(st_grid)
 
 # cokriging of two variables
-traffic.g <- gstat(id = "tomtom", formula=currentSpeed~1, data=data_tomtom, nmax=10, set=list(nocheck = 1))
-traffic.g <- gstat(traffic.g, "pems", Avg_Speed~1, data_pems, nmax = 10, set=list(nocheck = 1))
+traffic.g <- gstat(id = "tomtom", formula=log(currentSpeed)~1, data=data_tomtom, nmax=10, set=list(nocheck = 1))
+traffic.g <- gstat(traffic.g, "pems", log(Avg_Speed)~1, data_pems, nmax = 10, set=list(nocheck = 1))
 traffic.g <- gstat(traffic.g, model = vgm(1, "Sph", 900, 1), fill.all=T, set = list(nocheck = 1))
 x <- variogram(traffic.g, cutoff=1000)
 traffic.fit = fit.lmc(x, traffic.g, fit.method = 2)
