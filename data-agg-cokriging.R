@@ -6,7 +6,7 @@ library(lattice)
 library(raster)
 
 # primary data
-data_tomtom <- read.csv("data/d04_tomtom.csv", T)
+data_tomtom <- read.csv("data/d04_tomtom.csv", stringsAsFactors=F)
 class(data_tomtom)
 coordinates(data_tomtom) = ~x+y
 proj4string(data_tomtom) <- CRS("+init=epsg:7131")
